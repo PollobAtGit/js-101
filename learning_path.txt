@@ -1,0 +1,42 @@
+Basic JS learning resource:
+	__ codeacademy (JS basics. Specific to JS as language)
+		$$ DONE
+	__ w3school
+		** Integration with HTML
+	__ codeschool (An introduction to the basics of JavaScript)
+	__ teamtreehouse
+	__ Channel9 (Javascript Fundamentals: Development for Absolute Beginners)
+		** Integration with VS
+		** HTML
+		** JS basics
+
+Book:
+	__ Speaking JS
+		** Written blog style
+		** Short examples
+	__ JS good parts
+
+Framework:
+	__ AngularJS
+	__ Bootstrap
+	__ NodeJS
+
+AngularJS learning resources:
+	__ thinkster (A Better Way to Learn AngularJS) [https://thinkster.io/a-better-way-to-learn-angularjs/]
+		** concise
+
+JQuery:
+	__ tut++ (30 Days to Learn jQuery)
+		** screencast
+
+Project Ideas:
+	_ Online based HR/leave/evaluation management
+
+Programming problems {Order by easiest to hardest}:
+	__ talentbuddy
+	__ codewars
+	__ HackerRank {https://www.hackerrank.com/domains}
+
+Scala:
+
+Playframework:
