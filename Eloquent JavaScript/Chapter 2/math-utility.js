@@ -73,6 +73,7 @@ unRefinedPrint("isNaN({}) => " + isNaN({}));
 //If the property/method isn't defined then use polyfill. Note, the definition & usage concept
 // is similar to C# extension method
 
+//This function won't work for valid numbers represented in string
 Number.isNaN = Number.isNaN || function (value) {
     return typeof value === 'number' && isNaN(value);
 };//Note the semicolon here. As the original statement is a assignment this end of statement is needed

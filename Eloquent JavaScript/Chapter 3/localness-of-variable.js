@@ -163,6 +163,10 @@ console.log();
 iHoistVariableDefinitionButNotAssignment();
 iWorkSimilarToTheAboveFunction();
 
+console.log(presidentOfUsa);//undefined
+var presidentOfUsa = "TRUMP";
+console.log(presidentOfUsa);//TRUMP
+
 // POI #4: Function 'iWorkSimilarToTheAboveFunction' shows what really happens when variables in a scope are hoisted
 
 /***************************** BRACES DONT CREATE SCOPE ***************************************/
@@ -297,3 +301,22 @@ console.log(iReturnObjConditionally());//{}
 // for the boolean so it's assigned to true
 
 // POI #8: Function declaration is error-prone if it depends on variable(s) that are assigned later
+// POI #9: Variables are hoisted to the top of the scope they reside. i.e. if the variable is in a function then it will
+// be hoisted to the top of the function if it is scoped inside the global object (just declared in the file) than it will
+// be hoisted to the top of the file
+
+//// POI #10: The global object is the Window only in case of browser. For this file global object is noting ({ })
+console.log(this);
+
+/************************************ BETTER EXAMPLE OF VARIABLE HOISTING************************************/
+
+var patternName = "Bridge Pattern";
+function displayPatternName() {
+    console.log(patternName);
+    var patternName = "CQRS";//This variable hides the global 'patternName' variable also it will be hoisted
+    console.log(patternName);
+}
+
+console.log("\n/** BETTER EXAMPLE OF VARIABLE HOISTING **\\\n");
+console.log(patternName);
+displayPatternName();
