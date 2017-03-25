@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+
+    </body>
+    <script type="application/javascript">
+
+        (function(){
+            for(var i = 0; i < 5; i++) {
+
+                var btn = document.createElement('button');
+
+                //Poi: Creating elements (text) & appending them to the button
+                btn.appendChild(document.createTextNode('Button ' + i));
+
+                //Poi: The event is bound with variable 'i' which is in a different scope & that variable (i)
+                //is bound by the rule of closure
+                btn.addEventListener('click', (function(i) {
+
+                    //Poi: Following won't work because 'valueToPrint' is still pointing to 'i' which is
+                    //subject to change later
+                    // var valueToPrint = i;
+
+                    //Poi: Directly using 'console.log' will IMMEDIATELY EXECUTE the function which will print
+                    //the value of 'i' to console whenever the function is bound to the 'click' event.
+
+                    //Poi: Even though in this case proper value of 'i' will be printed, the function will NOT
+                    //be bound properly. Because the function is immediately executed. There is not function
+                    //to be ran later
+
+                    // console.log(i);
+
+                    //Poi: This time after IMMEDIATE EXECUTION a function will be RETURNED which will be the
+                    //bounded event listener
+
+                    return function() {
+                        console.log(i);
+                    };
+                })(i));
+
+                //Poi: Element will be appended in document body
+                //Before this statement the element exists in code ONLY
+                document.body.appendChild(btn);
+            }
+        })();
+
+    </script>
+</html>
