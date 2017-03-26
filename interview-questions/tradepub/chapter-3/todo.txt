@@ -1,0 +1,6 @@
+
+# What is 'event loop'?
+
+# What is the relation between 'event loop' & 'setTimeOut'?
+
+# Why 'false == null' & 'false == {}' results in 'false'?

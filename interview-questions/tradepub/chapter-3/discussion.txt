@@ -1,0 +1,17 @@
+
+# Comparison between 'false' & 'null' will result 'false'
+    {code}
+        console.log(false == null);//false
+    {code}
+
+# Comparison between 'false' & '{}' (empty object) will result 'false'
+    {code}
+        console.log(false == {});//false
+        console.log(false == null);//false
+    {code}
+
+# In a if else condition 'null' is equivalent to 'false'
+    {code}
+        //Execution will always go to 'else' condition
+        if(null) { } else { }
+    {code}
