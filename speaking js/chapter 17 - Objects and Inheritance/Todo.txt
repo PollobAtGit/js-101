@@ -1,0 +1,10 @@
+
+# What is the use case of 'Object()' function?
+
+# What is enumerable methods and properties of an Object?
+
+# Why doesn't Number function returns an instance of Number?
+
+# What is the difference between using Number as constructor and Number as function?
+
+# What are the use cases for Number, Boolean, String methods as simple function not as constructor?
