@@ -8,3 +8,6 @@
 # What is the difference between using Number as constructor and Number as function?
 
 # What are the use cases for Number, Boolean, String methods as simple function not as constructor?
+
+# Why is it possible that during .bind(...) some parameters of the function can be provided as initial value
+    but others can be left out. Possibly somethig to do with closure
