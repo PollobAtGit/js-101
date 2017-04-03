@@ -1,3 +1,7 @@
 
 # Conceptually, 'call' is invoked on a function always. In other words, 'call' needs to be provided
     with the context (provided by 'this')
+
+# If another function is invoked from one 'host' function then 'this' in host function and 'this' in another
+    function will not refer to the same object. So apply, call or bind should be used to give the context to
+    that method

@@ -46,3 +46,12 @@ print(anotherSayHelloToFunc('Wolverine'));
 //invoked, it won't get proper value of 'this' even though it is being set during invocation
 var anotherOneOfSayHelloToFunc = jane.saysHelloTo.bind({ name: 'I am not Jane too' });
 print(anotherOneOfSayHelloToFunc('sd'))
+
+//POI: To handle this sort of call back scenario, .bind(...) should be used to provide the context because
+//other than that if the method contains a reference to 'this' than 'this' will be undefined when invoked
+function callIt(callBack) {
+    return callBack();
+}
+
+print(callIt(jane.saysHelloTo.bind(jane, 'No-One')));
+
