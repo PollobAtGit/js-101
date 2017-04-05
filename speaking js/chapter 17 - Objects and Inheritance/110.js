@@ -37,3 +37,20 @@ print(anotherJane.anotherDescribe());//undefined
 anotherJane.age = 20;
 
 print(anotherJane.anotherDescribe());
+
+//POI: 'isPrototypeOf' is in prototype of Object. So 'jane' has that property too
+//POI: Syntax: prototypeName.isPrototypeOf(inheritedObjName)
+print(jane.isPrototypeOf(anotherJane));//true
+
+function getDefiningObject(obj, key) {
+    obj = Object.create(obj);
+
+    while(obj && !Object.hasOwnProperty(key)) {
+        obj = Object.getPrototypeOf(obj);
+    }
+
+    return obj;
+}
+
+// print(getDefiningObject(anotherJane, 'age'));
+// print(getDefiningObject(anotherJane, 'name'));
