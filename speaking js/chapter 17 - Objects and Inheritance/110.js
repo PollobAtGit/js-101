@@ -42,15 +42,18 @@ print(anotherJane.anotherDescribe());
 //POI: Syntax: prototypeName.isPrototypeOf(inheritedObjName)
 print(jane.isPrototypeOf(anotherJane));//true
 
-function getDefiningObject(obj, key) {
-    obj = Object.create(obj);
+function getDefiningObject(objToCheck, key) {
 
-    while(obj && !Object.hasOwnProperty(key)) {
+    //POI: This ensures we are checking on objects rather than on raw Number, String etc. If we
+    // get raw types that will be converted to objects. Also Object.
+    var obj = Object.create(objToCheck);
+
+    //POI: 'hasOwnProperty' returns that objects properties only not of the inherited ones
+    while(obj && !obj.hasOwnProperty(key)) {
         obj = Object.getPrototypeOf(obj);
     }
-
     return obj;
 }
 
-// print(getDefiningObject(anotherJane, 'age'));
-// print(getDefiningObject(anotherJane, 'name'));
+print(getDefiningObject(anotherJane, 'age'));
+print(getDefiningObject(anotherJane, 'name'));
