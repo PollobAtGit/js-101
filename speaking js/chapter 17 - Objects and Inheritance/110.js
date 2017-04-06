@@ -17,6 +17,11 @@ print(jane.describe());
 //POI: Object.create will set the passed parameter as the prototype of 'anotherJane'
 var anotherJane = Object.create(jane);
 
+//POI: Evaluation of 'jane' will show nothing indicating it has no own property. That doesn't mean
+//'anotherJane' has no prototype. In fact by definition, it's has a prototype 'Object' & in that case,
+//jane.
+print(anotherJane);//{}
+
 //POI: anotherJane inherited property 'describe' from 'jane'
 print(anotherJane.describe());
 
@@ -57,3 +62,27 @@ function getDefiningObject(objToCheck, key) {
 
 print(getDefiningObject(anotherJane, 'age'));
 print(getDefiningObject(anotherJane, 'name'));
+
+//POI: Works the same as 'Object.getPrototypeOf'
+//POI: __proto__ is being used as getter
+print(anotherJane.__proto__);
+print(jane.__proto__);//{}
+
+var anotherObj = {
+
+    //POI: __proto__ can be used as setter too. Old approach had no way to set property this way
+    __proto__: jane
+};
+
+print(anotherObj);
+
+anotherObj.describe = function() {
+
+    //POI: name key is defined in 'prototype' but 'age' isn't defined yet
+    return this.name + "\t" + this.age;
+}
+
+//POI: Evaluation operation will print only 'anotherObj' objects OWN properties not the inherited ones
+print(anotherObj);
+
+print(anotherObj.describe());
