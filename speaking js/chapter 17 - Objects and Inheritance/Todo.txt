@@ -11,3 +11,20 @@
 
 # Why is it possible that during .bind(...) some parameters of the function can be provided as initial value
     but others can be left out. Possibly somethig to do with closure
+
+# Deleting prototype property will not have any impact on the object. But why return data is 'true'?
+
+# Can a JS object inherit from multiple object (multiple inheritance)?
+
+# Is there a reason to prefer one above another among the following two code snippet?
+    {code: js}
+        var arr = [];
+        arr.push('VALUE');
+    {code}
+
+    or
+
+    {code: js}
+        var arr = [];
+        Array.prototype.push.call(arr, 'VALUE');
+    {code}

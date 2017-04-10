@@ -8,3 +8,8 @@
 
 # Evaluating JS object will show only OWN property keys & their corresponding values. No the inherited
     property keys or values
+
+# Setting and deletion works only on own property not on prototype property
+
+# To delete any property from an object that is in the prototype chain, code must get the original object
+    that defined the property then delete the property from the original object
