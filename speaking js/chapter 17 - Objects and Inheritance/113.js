@@ -37,21 +37,15 @@ print('protoEnumFalse' in obj);//true
 print('objEnumFalse' in obj);//true
 
 function returnAllPropertiesInPrototypeChain(obj) {
-    var objInstance = Object.create(obj);
     var objProperties = [];
 
-    while (objInstance) {
-        var propertyNames = Object.getOwnPropertyNames(objInstance);
-        print(objInstance);
-        // print(propertyNames);
-        for (var key in propertyNames) {
-            Array.prototype.push.call(objProperties, key);
-        }
-        objInstance = Object.getPrototypeOf(objInstance);
+    //POI: Will ensure we will not get to the base Object object
+    while (Object.getPrototypeOf(obj) !== null) {
+        objProperties = objProperties.concat(Object.getOwnPropertyNames(obj));
+        obj = Object.getPrototypeOf(obj);
     }
 
     return objProperties;
 }
 
-returnAllPropertiesInPrototypeChain(obj);
-//print(returnAllPropertiesInPrototypeChain(obj));
+print(returnAllPropertiesInPrototypeChain(obj));
