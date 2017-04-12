@@ -28,3 +28,7 @@
         var arr = [];
         Array.prototype.push.call(arr, 'VALUE');
     {code}
+
+# What is the impact of enumerable keys & non-enumerable keys in an object?
+
+# Is there any impact of enumerability of a property in case of inheritance?

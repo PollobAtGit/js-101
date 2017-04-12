@@ -47,7 +47,10 @@ print(Object.keys(jane));
 print(Object.getOwnPropertyNames(jane));
 
 //POI: anotherJane inherits 'jane' & no own property has been defined. So it will not list any keys
+//POI: Object.keys returns only enumerable keys
 print(Object.keys(anotherJane));
+
+//POI: getOwnPropertyNames returns all (enumerable & non-enumerable) own keys so it should be used most of the times
 print(Object.getOwnPropertyNames(anotherJane));
 
 var keys = [];
