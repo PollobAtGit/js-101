@@ -13,3 +13,5 @@
 
 # To delete any property from an object that is in the prototype chain, code must get the original object
     that defined the property then delete the property from the original object
+
+# Object.prototype evaluates to '{}'

@@ -32,3 +32,11 @@
 # What is the impact of enumerable keys & non-enumerable keys in an object?
 
 # Is there any impact of enumerability of a property in case of inheritance?
+
+# Object's prototype is null. If so then why can we access Object.prototype.hasOwnProperty?
+
+# What are the methods that we can access directly via Object such as Object.getPrototypeOf()?
+
+# What is the difference between 'Object.prototype' & '{}'?
+
+# Why 'Object.prototype' evaluates to '{}'?

@@ -49,3 +49,7 @@ function returnAllPropertiesInPrototypeChain(obj) {
 }
 
 print(returnAllPropertiesInPrototypeChain(obj));
+
+//POI: hasOwnProperty & getOwnPropertyNames will get properties regardless of their enumerability
+print(Object.prototype.hasOwnProperty.call(obj, 'objEnumFalse'));
+print(Object.prototype.hasOwnProperty.call(obj, 'objEnumTrue'));
