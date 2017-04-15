@@ -1,0 +1,9 @@
+
+# JavaScript has five primitive types. They are followings:
+    ## Number
+    ## String
+    ## Boolean
+    ## null
+    ## undefined
+
+# All of the above primitive types has a literal representation as well as a object representation.
