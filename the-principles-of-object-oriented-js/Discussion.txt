@@ -7,3 +7,7 @@
     ## undefined
 
 # All of the above primitive types has a literal representation as well as a object representation.
+
+# An JS object is an un-ordered list of properties consisting of name & values
+
+# Functions themselves are reference types in JS
