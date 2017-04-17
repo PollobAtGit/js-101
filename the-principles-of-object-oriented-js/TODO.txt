@@ -1,0 +1,13 @@
+
+# Is there a difference between the followings?
+    {code: js}
+        var obj = {};
+        var anotherObj = Object.create({});
+        var anotherOneObj = new Object();
+    {code}
+
+# When and how to use Error built-in type?
+
+# When 'Function' constructor might be used?
+
+# What is the best practice between using 'Array' constructor & Array literal notation?

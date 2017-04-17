@@ -11,3 +11,17 @@
 # An JS object is an un-ordered list of properties consisting of name & values
 
 # Functions themselves are reference types in JS
+
+# Objects in JS are simply dictionary/hash table with property keys and their corresponding values
+
+# JS is a garbage collected language. If any reference type object has no usage/has no reference associated with it
+    then that object will be collected by garbage collector. Deferencing can be done just by setting null to
+    that variable
+
+# Built-in types in JS are:
+    RegExp
+    Function
+    Object
+    Array
+    Date
+    Error
