@@ -13,3 +13,7 @@
 # What is the best practice between using 'Array' constructor & Array literal notation?
 
 # What are the other arguments in RegExp constructor?
+
+# When it might be necessary to choose properties dynamically? What are the common use cases?
+
+# Is it a best practice to use single quotation over double quotation?

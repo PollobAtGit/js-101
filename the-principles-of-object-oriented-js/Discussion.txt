@@ -25,3 +25,19 @@
     Array
     Date
     Error
+
+# String wrapper object can hold individual properties similar to any other JS object. Following will work:
+
+    {code: JS}
+
+        var strWrapperObj = new String('STRING');
+        strWrapperObj.lastName = 'OBJ';
+        console.log(strWrapperObj.lastName);//'OBJ'
+
+        var str = 'STRING';
+        str.lastName = 'OBJ';
+        console.log(str.lastName);//undefined
+
+    {code}
+
+# String
