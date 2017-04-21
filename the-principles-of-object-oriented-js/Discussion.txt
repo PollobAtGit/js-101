@@ -40,4 +40,9 @@
 
     {code}
 
-# String
+# When we assign/define a property for a JS primitive type (String, Number or Boolean), under the hood JS interpreter defines that property for a wrapper object
+    of that type. So the property is properly defined but that object is de-referenced immediately & also code doesn't have a handle to that wrapper
+    object (as created internally) so that property is lost (will produce undefined) when we try to access that property with the context of the primitive type
+    variable
+
+# instanceof works properly for reference types only

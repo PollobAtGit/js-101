@@ -71,3 +71,28 @@ print(typeof new String(''));//object
 
 //POI: Primitive type
 print(typeof String(''));//string
+
+print(new String() instanceof String);//true
+
+//POI: '' is a primitive type not reference type
+print('' instanceof String);//false
+
+//POI: String() will cast the given value to String & return type will be a primitive type
+print(String('') instanceof String);//false
+
+print(new Number() instanceof Number);//true
+
+//POI: 1 is a primitive type not reference type
+print(1 instanceof Number);//false
+
+//POI: Casted returned value is a primitive type not reference type
+print(Number('') instanceof Number);//false
+
+//POI: Returned value is a reference type not primitive type
+print(new Boolean() instanceof Boolean);//true
+
+//POI: Given value is a primitive type not a reference type
+print(true instanceof Boolean);//false
+
+//POI: Casted return value is a primitive type not a reference type
+print(Boolean() instanceof Boolean);//false
