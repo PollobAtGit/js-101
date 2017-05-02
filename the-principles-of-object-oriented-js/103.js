@@ -69,3 +69,25 @@ var obj = Object.create({}, {
 arrByCtor["push"](obj);
 
 print(arrByCtor);
+
+
+var numericArray = [];
+function pushOrPop(operation, valueToPush) {
+    if (!valueToPush && operation && operation.toUpperCase() === "POP") {
+        return Array.prototype[operation].call(numericArray);
+    }
+    Array.prototype[operation].call(numericArray, valueToPush);
+}
+
+pushOrPop("push", 10);
+pushOrPop("push", 100);
+print(numericArray);
+
+print(pushOrPop("pop"));//100
+print(numericArray);
+
+print(pushOrPop("pop"));//10
+print(numericArray);
+
+print(pushOrPop("pop"));//undefined
+print(numericArray);
