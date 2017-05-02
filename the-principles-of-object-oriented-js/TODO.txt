@@ -13,3 +13,5 @@
 # What is the best practice between using 'Array' constructor & Array literal notation?
 
 # What are the other arguments in RegExp constructor?
+
+# Where does 'call' reside? 'Function' object's prototype?
