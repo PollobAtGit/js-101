@@ -46,3 +46,8 @@
     variable
 
 # instanceof works properly for reference types only
+
+# When using bind() method we have the option to set function argument later when it is really invoked. Also we can bind
+the arguments with function parameters when we are invoking bind to get the reference of the function
+
+# Conceptually, call/apply/bind can convert a standalone function (without any context, no method) to a method

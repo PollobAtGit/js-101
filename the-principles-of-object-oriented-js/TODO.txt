@@ -15,3 +15,5 @@
 # What are the other arguments in RegExp constructor?
 
 # Where does 'call' reside? 'Function' object's prototype?
+
+# Object property can be deleted. How about an object?
