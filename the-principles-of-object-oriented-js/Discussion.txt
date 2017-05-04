@@ -51,3 +51,37 @@
 the arguments with function parameters when we are invoking bind to get the reference of the function
 
 # Conceptually, call/apply/bind can convert a standalone function (without any context, no method) to a method
+
+# Adding a property to an object creates a OWN property
+
+# Adding property to an object using dot/bracket notation is almost like invoking [[put]] method on a
+dictionary & assigning value to a property is almost like invoking [[set]] method on a dictionary
+
+# If [[set]] is invoked on dictionary key that exists already than the previous value will simply be replaced
+with the new one
+
+# Following is NOT a better pattern to check if a property exists in an object or not. Because this statement
+will evaluate the object property. If that property does exist & the returned value is falsy (null, undefined,
+NaN, false, 0) than the if condition will be evaluated to true, so existing property will be defined again
+replacing the previous one.
+
+    {code:js}
+
+        //If property doesn't exist
+        if(!obj.propertyName) {
+            //Define the property
+        }
+
+    {code}
+
+# Following is a better approach to evaluate if a property exist or not because 'in' keyword doesn't
+evaluate the property value so only checking is done on that property's existence
+
+    {code:js}
+
+        //If property doesn't exist
+        if(!"propertyName" in obj) {
+            //Define property
+        }
+
+    {code}

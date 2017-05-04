@@ -17,3 +17,5 @@
 # Where does 'call' reside? 'Function' object's prototype?
 
 # Object property can be deleted. How about an object?
+
+# How to prevent an object from being modified?
