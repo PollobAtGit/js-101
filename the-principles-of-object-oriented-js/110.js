@@ -34,7 +34,7 @@ var obj = {
     age: 0,
     address: null,
     birthDate: undefined
-}
+};
 
 print(checkPropertiesExistanceWrongApproach(obj, "name"));
 

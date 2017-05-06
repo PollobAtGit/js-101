@@ -19,3 +19,23 @@
 # Object property can be deleted. How about an object?
 
 # How to prevent an object from being modified?
+
+# Can 'delete' remove a prototype property?
+
+# Write a function to return all property name & property values considering prototype chain
+
+# What is the usage of enumerability in JS object property?
+
+# Why following code doesn't work properly
+
+    {code:js}
+        var obj = { name: "NAME" };
+        Object.prototype.propertyIsEnumerable(obj, "NAME");
+    {code}
+
+    But following works properly:
+
+    {code:js}
+        var obj = { name : "NAME" };
+        obj.propertyIsEnumerable("name");
+    {code}

@@ -85,3 +85,30 @@ evaluate the property value so only checking is done on that property's existenc
         }
 
     {code}
+
+# JS object properties can be removed from the specified object by 'applying' keyword 'delete' on that object
+property such as following:
+
+    {code:js}
+        var obj = { name: "NAME" };
+        console.log(obj.name);//NAME
+        delete obj.name;
+        console.log(obj.name);//undefined
+    {code}
+
+# Applying 'delete' on an object property is almost like invoking [[Delete]] for that key on the dictionary
+
+# Other dictionary operations on JS object is [[Put]], [[Set]] & [[Delete]]
+
+# 'delete' returns boolean value indicating whether the deletion operation was successful or not but this
+    returned value is not reliable because when 'delete' tries to delete an property (that was inherited
+    via prototype) then the delete operation actually fails because 'delete' ONLY deletes OWN properties still
+    the return value is 'true'
+
+# By default, all JS object properties are enumerable. When an property is set up it's [[Enumerable]] property
+    is set to be 'true'
+
+# By default, functions are enumerable, similar to other properties
+
+# But most of the native JS function's enumerability is 'false'
+
