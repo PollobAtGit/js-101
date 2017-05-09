@@ -41,3 +41,7 @@
     {code}
 
 # Why object instances created using object literal are considered as 'GENERIC' objects?
+
+# How to get the Type name of an instance directly? Like 'typeof'?
+
+# Why 'null' is a typeof 'object' but NOT an instance of 'Object'?

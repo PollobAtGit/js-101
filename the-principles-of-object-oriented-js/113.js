@@ -40,3 +40,76 @@ print(anotherPerson.constructor === Person);//true
 
 //POI: Both refers (points) to the same constructor (function)
 print(anotherPerson.constructor === person.constructor);//true
+
+function Car(model) {
+    this.model = model;
+    this.sayModelName = function () {
+        return Array.prototype.join.call(["This Car's Model Is", this.model], " ");
+    }
+}
+
+var carInstance = new Car("MOS89");
+
+print(carInstance.model);
+print(carInstance.sayModelName());
+
+var anotherCarInstance = new Car("MOS0007");
+
+print(anotherCarInstance.model);
+print(anotherCarInstance.sayModelName());
+
+// ------------------ CTOR WITH RETURN STATEMENT -----------------------------/
+
+function Printer(model) {
+    this.model = model;
+    this.sayModelName = function () {
+        return Array.prototype.join.call(["This Printer's Model Is", this.model], " ");
+    }
+
+    //POI: This is totally valid (may be advisable?). This will work properly as long as the returned value
+    //is an instance of 'Object'
+    return this;
+}
+
+
+//POI: Returned object is of 'Printer' type
+var printer = new Printer("MOS1107");
+
+print(printer.model);
+print(printer.sayModelName());
+
+
+function Album(capacity) {
+    this.capacity = capacity;
+    this.sayCapacityCount = function () {
+        return Array.prototype.join.call(["This Album's Capacity Is", this.capacity], " ");
+    }
+
+    //POI: This return will not have any impact on any 'Album' instance because the rule is if the returned
+    //value is not an instance of 'Object' i.e. of primitive type then compiler will IGNORE the return
+    //statement
+    return 0;
+}
+
+//POI: The instance will be properly instantiated
+var album = new Album(10);
+
+print(album.capacity);
+print(album.sayCapacityCount());
+
+function IdCard(number) {
+    this.cardNumber = number;
+
+    //POI: This returned value is an instance of 'Object' (NOT primitive) so this return statement WILL NOT
+    //BE IGNORED (modular pattern levarages this technique)
+
+    return {
+        cardNumber: null
+    };
+}
+
+var idCard = new IdCard("10");
+
+//POI: 'cardNumber' is not defined in the returned object. So 'null'
+print(idCard.cardNumber);//null
+

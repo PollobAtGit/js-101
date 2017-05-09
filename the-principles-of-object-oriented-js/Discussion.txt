@@ -113,3 +113,9 @@ property such as following:
 # But most of the native JS function's enumerability is 'false'
 
 # Objects created with object literals are said to be GENERIC OBJECTS
+
+# Functionally, instance checking by 'constructor' property & using 'instanceof' is same but it's a better
+pattern to use 'instanceof' because being a property, 'constructor' can be replaced by something else
+somewhere in the code
+
+# 'null' is a typeof 'object' but NOT an instance of 'Object'
