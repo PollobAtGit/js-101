@@ -39,3 +39,5 @@
         var obj = { name : "NAME" };
         obj.propertyIsEnumerable("name");
     {code}
+
+# Why object instances created using object literal are considered as 'GENERIC' objects?
