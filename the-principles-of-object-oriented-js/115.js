@@ -46,6 +46,8 @@ function Human(name) {
         enumerable: true
     });
 
+    //POI: The method 'sayMyName' is BOUND with the object instance. So for 'n' numbers of object instances
+    //there will be 'n' functions
     this.sayMyName = function () { return this.name; };
 }
 

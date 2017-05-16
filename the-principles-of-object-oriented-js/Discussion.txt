@@ -119,3 +119,9 @@ pattern to use 'instanceof' because being a property, 'constructor' can be repla
 somewhere in the code
 
 # 'null' is a typeof 'object' but NOT an instance of 'Object'
+
+# 'new' returns the object instance
+
+# Without 'new', Person is just a function without a 'return' statement
+
+# In strict mode, 'this' is NOT bound to GLOBAL OBJECT
