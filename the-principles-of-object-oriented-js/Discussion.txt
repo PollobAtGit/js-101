@@ -125,3 +125,5 @@ somewhere in the code
 # Without 'new', Person is just a function without a 'return' statement
 
 # In strict mode, 'this' is NOT bound to GLOBAL OBJECT
+
+# [[Prototype]] property (internal) is used to track the prototype of an object instance
