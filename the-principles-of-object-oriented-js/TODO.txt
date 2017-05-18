@@ -45,3 +45,8 @@
 # How to get the Type name of an instance directly? Like 'typeof'?
 
 # Why 'null' is a typeof 'object' but NOT an instance of 'Object'?
+
+# What are the object properties (methods) that Object.prototype has?
+
+# Technically, what's the difference between {} & Object.prototype
+

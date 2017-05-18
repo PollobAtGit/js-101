@@ -127,3 +127,17 @@ somewhere in the code
 # In strict mode, 'this' is NOT bound to GLOBAL OBJECT
 
 # [[Prototype]] property (internal) is used to track the prototype of an object instance
+
+# Any object created using object literal has their [[Prototype]] set to Object.prototype
+    {code:js}
+        var object = {};
+        var prototype = Object.getPrototypeOf(object);
+
+        console.log(prototype === Object.prototype);//true
+    {code}
+
+# 'Object' ITSELF has a prototype & that is an EMPTY object ({})
+
+# Search for a property starts in the OWN PROPERTY SET. Then the engine considers prototype chain. That's why
+any property that is defined somewhere in prototype chain can be overridden by defining another property with
+same name in OWN property set
