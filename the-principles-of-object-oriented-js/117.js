@@ -56,9 +56,14 @@ delete anObject["toString"];
 print(anObject.toString);//[Function: toString]
 print(anObject.toString());
 
-print("----")
+print("\n----------------------------------\n")
+
+//TODO: Why not Object?
 print(typeof anObject.toString);//[function]
 print(anObject.toString instanceof Function);//true
+print(anObject.toString instanceof Object);//true
+
+print("\n----------------------------------\n")
 
 //POI: Generic objects (created using literal notation) DOESN'T have a 'prototype' property
 print(anObject.prototype === undefined);//true
