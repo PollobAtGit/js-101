@@ -50,3 +50,6 @@
 
 # Technically, what's the difference between {} & Object.prototype
 
+# Clarify the difference between 'Function' & 'Object'
+
+# What are ALL the properties that a Function has?
