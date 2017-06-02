@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS In URL</title>
+</head>
+
+<style type="text/css">
+
+    a {
+        display: block;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+    window.onload = function (argument) {
+        var headingTag = document.getElementById("main-heading");
+
+        //POI: 'innerText' is a property of HtmlElement
+        //TODO: What is HtmlHeadElement? What's it's relationship with HtmlElement
+        alert(headingTag.innerText);
+    };
+
+</script>
+
+<body>
+
+    <!-- POI: Following is a HTMLHeadingElement -->
+    <h2 id="main-heading">JS In URL</h2>
+
+    <!--
+        POI: Pressing this link will show current date. BASED ON BROWSER, the current document might be totally over-written.
+
+        Chrome: Doesn't over-write the CURRENT document. So pressing 'Back' in browser will not go back to THIS page
+        Firefox/Edge: Does over-write the CURRENT document. So pressing 'Back' take back to this page
+    -->
+
+    <!-- POI: Using usual JS browser API to access HtmlElements -->
+    <a href="javascript:new Date().toLocaleTimeString() + ' [' + document.getElementById('main-heading').innerText + ']';">
+        Click to execute the JS
+    </a>
+
+    <a href="javascript:void window.open('about:blank')">
+        Open New Blank Window
+    </a>
+
+    <!-- POI: Clicking this anchor will load THIS page again because href is EMPTY -->
+    <a href="">
+        Load THIS page again
+    </a>
+
+    <!-- POI: Clicking this anchor will load THIS page again (EMPTY href) & will perform the action mentioned in event handler -->
+    <a href="" onclick="window.open('about:blank')">
+        Open New Blank Window (via event handler) &amp; Load This Page
+    </a>
+
+    <!-- TODO: Prevent default page loading event -->
+    <!-- TODO: What's the property to prevent default action? -->
+    <a href="" onclick="window.open('about:blank')">
+        Open New Blank Window
+    </a>
+
+</body>
+</html>
