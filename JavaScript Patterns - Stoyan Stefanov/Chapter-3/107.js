@@ -29,6 +29,8 @@ print(JSON.parse(jsonStr));
 //the function simply ignores the the method property
 print(JSON.stringify({
     name: "NAME"
+
+    //POI: This function will simply be ignored by JSON.stringify
     , sayName: function () {
         return "FUNCTION";
     }
@@ -59,3 +61,20 @@ print(Object.getPrototypeOf(aChild) === Parent);//true
 //POI: Parent is the prototype of Child. Still 'isParent' is NOT in the JSON version because JSON.stringify works on
 //OWN PROPERTY
 print(JSON.stringify(aChild));//{"isChild":true}
+
+//POI: JSON string is declared within SINGLE QUOTATIONS because JSON REQUIRES DOUBLE QUOTATION inside original JSON data for
+//KEY. So string's quotation HAS TO BE SINGLE QUOTATION
+//POI: To expand the JSON string into multiple lines back-slash (\) has been used.
+//POI: 10 is NOT wrapped in DOUBLE QUOTATION because Number is a valid JSON type
+//POI: A JS object can have method BUT method doesn't make sense for JSON object. So 'function' inside JSON string will
+//throw exception if any attempt to parse to JS object is made
+
+var json = '{\
+                "name": "NONE"\
+                , "my age": 10\
+            }';
+
+//POI: Quotation around 'name' property is gone because that's valid for JS object key BUT SINGLE QUOTATION around 'my age'
+//property is prevalent because there's a space in between
+print(JSON.parse(json));//{name: 'NONE', 'my age': 10}
+
