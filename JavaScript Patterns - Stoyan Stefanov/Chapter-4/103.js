@@ -41,6 +41,9 @@ function declareFunctionConditionally(shouldDeclare) {
 
     if (shouldDeclare) {
         //POI: For some reason function declaration is hoisted in block scope (WHY? Block scope doesn't work for JS)
+        //POI: Function declaration hoisting in block scope is a implementation specific behavior. But based on standard,
+        //function 'func' will be hoisted in function scope
+        //Better practice: Not to use conditional function delcaration. In strict mode this is not valid
         print(typeof func === 'function');//true
         function func() { }
     } else {
@@ -60,3 +63,40 @@ declareFunctionConditionally();
 print('');
 
 declareFunctionConditionally(true);
+
+var returnFunc = function (isTrue) {
+
+    print(typeof trueFunc === 'undefined');
+    print(typeof falseFunc === 'undefined');
+
+    if (isTrue) {
+
+        //POI: Named function 'func' is not hoisted because alias 'trueFunc' is hoisted
+        print(typeof func === 'function');//false
+
+        //POI: Function expression is used. So the variable/alias will be hoisted
+        //BP: Directly returning an un-named function expression. As there's no alias/variable there's nothing to be hoisted
+        var trueFunc = function func() { return 10; };
+
+        print(trueFunc.name);//func
+
+        return trueFunc;
+    }
+
+    //POI: Named function 'anotherFunc' is not hoisted because alias 'falseFunc' is hoisted
+    print(typeof anotherFunc === 'function');//false
+
+    //POI: Function expression is used. So the variable/alias will be hoisted
+    //BP: Directly returing an un-named function
+    var falseFunc = function anotherFunc() { return 20; };
+
+    print(falseFunc.name);//anotherFunc
+
+    return falseFunc;
+}
+
+print('');
+print(returnFunc()());//20
+
+print('');
+print(returnFunc(true)());//10
