@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Hero } from './hero'
 import { HeroDetailComponent } from './hero-detail.component'
+import { EmployeeComponent } from './employee/employee.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { HeroDetailComponent } from './hero-detail.component'
   <div class="hero">
     <ul class="heroes">
       <li *ngFor="let hero of heros" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
+        <span class="badge">{{hero.id + 30}}</span> {{hero.name}}
       </li>
     </ul>
   </div>

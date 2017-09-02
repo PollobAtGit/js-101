@@ -3,15 +3,7 @@ import { Hero } from './hero';
 
 @Component({
     selector: 'hero-detail',
-    template: `
-        <div *ngIf="hero">
-        <p>[{{hero.name}}] Details</p>
-        <div>
-            <label>Id: </label>{{hero.id}}
-            <input [(ngModel)]="hero.name" placeholder="name" />
-        </div>
-        </div>
-    `
+    templateUrl: 'hero-detail.component.html'
 })
 
 export class HeroDetailComponent {

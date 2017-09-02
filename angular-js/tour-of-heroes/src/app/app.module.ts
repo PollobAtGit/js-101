@@ -4,17 +4,21 @@ import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { HeroDetailComponent } from './hero-detail.component'
+import { EmployeeComponent } from './employee/employee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+
+  // POI: Change bootstrapped class name toggle start up component
+  bootstrap: [EmployeeComponent]
 })
 export class AppModule { }
