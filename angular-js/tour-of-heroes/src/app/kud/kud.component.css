@@ -1,0 +1,11 @@
+table {
+    text-align: left;
+}
+
+br {
+    margin: 10px;
+}
+
+.slight-border {
+    border: 1px solid black;
+}

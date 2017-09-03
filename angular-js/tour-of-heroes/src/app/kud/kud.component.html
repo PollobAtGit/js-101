@@ -1,0 +1,85 @@
+<h1>Following Venkat!</h1>
+
+<table class="slight-border">
+    <thead>
+        <th>Employee</th>
+        <th>Details</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>First Name</td>
+            <td>{{firstName}}</td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>{{lastName}}</td>
+        </tr>
+        <tr *ngIf="isShowDetails">
+            <td>Gender</td>
+            <td>{{gender}}</td>
+        </tr>
+        <tr *ngIf="isShowDetails">
+            <td>Age</td>
+            <td>{{age}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<button id="main-id" (click)="mainIdClick()" (mouseover)="mouseOverEvent()">
+    {{isShowDetails ? "Hide Details" : "Show Details"}}
+</button>
+
+<br/>
+<br/>
+
+<!-- $event contains the event data -->
+<input [value]="firstName" (input)="firstName=$event.target.value">
+<br/>
+<label>{{firstName}}</label>
+
+<br/>
+
+<!-- POI: ngModel is an short hand for (input) event handling -->
+<input [(ngModel)]="firstName" />
+
+<br/>
+
+<table>
+    <thead>
+        <th>Num.</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Annual Salary</th>
+        <th>Date Of Birth</th>
+    </thead>
+
+    <!-- TODO: Why is invoking getEmployees() enough to enable two way binding for 'employees' list ? -->
+    <!-- POI: For every iteration a new HTML element will be created on which 'ngFor has been applied -->
+
+    <tbody>
+        <tr *ngFor="let e of getEmployees();trackBy:trackByEmpCode;let index = index">
+            <td class="slight-border">{{index + 1}}</td>
+            <td class="slight-border">{{e.code | lowercase}}</td>
+            <td class="slight-border">{{e.name | uppercase}}</td>
+            <td class="slight-border">{{e.gender | lowercase | uppercase}}</td>
+            <td class="slight-border">{{e.annualSalary | currency:'USD':true}}</td>
+            <td class="slight-border">{{e.dateOfBirth | date:fulldate}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<button (click)="addEmployee()">
+    Add New Employee
+</button>
+
+<br/>
+<br/>
+
+<button (click)='getNewSetOfEmployees()'>
+    Refresh List
+</button>
