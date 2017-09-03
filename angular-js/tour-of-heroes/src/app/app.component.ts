@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero'
 import { HeroDetailComponent } from './hero-detail.component'
 import { EmployeeComponent } from './employee/employee.component';
+import { HeroService } from "./hero.service";
 
 @Component({
   selector: 'app-root',
@@ -18,24 +19,36 @@ import { EmployeeComponent } from './employee/employee.component';
     </ul>
   </div>
   `,
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+
+  // POI: DI tool now knows what to inject
+  providers: [HeroService]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'My First Angular App';
   selectedHero: Hero;
-  heros: Hero[] = HEROS;
+  heros: Hero[];
+
+  // POI: service is now a member of 'this'
+  // POI: To get an instance of an object use constructor injection
+  constructor(private service: HeroService) { }
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
   }
-}
 
-const HEROS: Hero[] = [
-  { id: 10, name: "Mr. Nice" },
-  { id: 20, name: "Narco" },
-  { id: 30, name: "Bombasto" },
-  { id: 40, name: "Celeritas" },
-  { id: 50, name: "Magneta" },
-  { id: 60, name: "RubberMan" },
-];
+  getHeroes(): void {
+    this
+      .service
+      .getHeroesSlowly()
+      .then(h => this.heros = h);
+  }
+
+  // POI: Similar to 'Application_Start'. When is it actually invoked
+  // POI: ngOnInit is an application hook
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+}

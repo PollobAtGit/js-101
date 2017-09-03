@@ -19,6 +19,6 @@ import { EmployeeComponent } from './employee/employee.component';
   providers: [],
 
   // POI: Change bootstrapped class name toggle start up component
-  bootstrap: [EmployeeComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
