@@ -1,0 +1,44 @@
+table {
+    border: 2px solid black;
+}
+
+tr {
+    border: 2px solid black;
+}
+
+td {
+    width: 100px;
+    border: 2px solid black;
+}
+
+.make-bold {
+    font-weight: bold;
+}
+
+.red-color {
+    color: red;
+}
+
+.text-align {
+    text-align: right;
+}
+
+.makeLight {
+    font-weight: bold;
+}
+
+.weird-font-family {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.aqua-color {
+    color: aquamarine;
+}
+
+.padding {
+    padding: 50%;
+}
+
+.margin {
+    margin: 50%;
+}
