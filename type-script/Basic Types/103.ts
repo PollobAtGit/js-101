@@ -2,11 +2,11 @@
 namespace OneOThree {
     // MI: null/undefined/never are subtypes of all types (!). So every type can contain null or undefined
 
-    function warnUser(s: string): void {
+    function warnUser(s: string | null): void {
         console.log(s);
     }
 
-    function warnUserStr(s: string) {
+    function warnUserStr(s: string | undefined) {
         console.log(s);
     }
 
@@ -16,7 +16,9 @@ namespace OneOThree {
     // let name: void;
     // let stt : void = 10;
     let sf: void = undefined;
-    let st: void = null;
+
+    // POI: null is not assignable to 'void'
+    // let st: void = null;
 
     warnUser("TypeScript!");
 
@@ -36,11 +38,11 @@ namespace OneOThree {
     console.log(u);
 
     // POI: null/undefined are sub types of other Types. So null/undefined can be assigned to number/string etc.
-    let nullNum: number = null;
-    let undefinedNum: number = undefined;
+    let nullNum: number | null = null;
+    let undefinedNum: number | undefined = undefined;
 
-    let nullStr: string = null;
-    let undefinedStr: string = undefined;
+    let nullStr: string | null = null;
+    let undefinedStr: string | undefined = undefined;
 
     enum Editor {
         VS = 10,
@@ -48,8 +50,8 @@ namespace OneOThree {
     };
 
     // POI: null/undefined are subtypes of all Types including custom types
-    var editor: Editor = null;
-    var _editor: Editor = undefined;
+    var editor: Editor | null = null;
+    var _editor: Editor | undefined = undefined;
 
     console.log(editor);
     console.log(_editor);

@@ -21,7 +21,7 @@ namespace OneOOne {
     console.log(({} as any) as number);//Output doesn't make any sense
 
     // POI: Accessing a variable before declaration is valid in JS because variable hoisting is performed
-    console.log(jsVar);
+    // console.log(jsVar);
     var jsVar = 150;
     console.log(jsVar);
 
@@ -75,7 +75,7 @@ namespace OneOOne {
         return invoke;
     }
 
-    console.log(theCityAlwaysSleeps(true)());
+    if (typeof theCityAlwaysSleeps === "undefined") { console.log(theCityAlwaysSleeps(true)()); }
 
     // TODO: Is it enough to use double equal in TS?
     console.log(theCityAlwaysSleeps(false) == undefined);//true

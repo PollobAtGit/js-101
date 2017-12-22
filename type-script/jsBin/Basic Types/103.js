@@ -13,7 +13,8 @@ var OneOThree;
     // let name: void;
     // let stt : void = 10;
     var sf = undefined;
-    var st = null;
+    // POI: null is not assignable to 'void'
+    // let st: void = null;
     warnUser("TypeScript!");
     // POI: Following is allowed because return type of warnUser is void & a variable can be of Type void
     var warn = warnUser(null);
