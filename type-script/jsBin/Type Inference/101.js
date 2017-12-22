@@ -42,7 +42,10 @@ var TypeInference;
     }(Animal));
     // KFU!
     // POI: Inferred type is not Animal[]. Ok but why it's not union type of Rhino, Snake & Lion?
+    // POI: In such situations it's better to explicitly mention the base type for readability
     var animals = [new Rhino(), new Snake(), new Lion()]; //Rhino[]
+    // POI: Better because typescript can't infer the base class
+    var otherSetOfAnimals = [new Rhino(), new Snake(), new Lion()];
     var JavaCompiler = (function () {
         function JavaCompiler() {
         }
@@ -58,5 +61,8 @@ var TypeInference;
     // POI: Chosing JavaCompiler is straight wrong because HtmlInputElement has an extra element 'X' so no instance
     // of HtmlInputElement can be placed in a variable of type JavaCompiler
     var miscellaneous = [new JavaCompiler(), new HtmlInputElement()]; // JavaCompiler
+    // POI: Typescript inferred the type of mouseEvent from the usage of window.onmousedown
+    // POI: This is called contextual type inference
+    window.onmousedown = function (e) { return console.log(e); };
 })(TypeInference || (TypeInference = {}));
 // In typescript polymorphism doesn't really work not even in case of type inference 
