@@ -79,5 +79,10 @@ for (const el in oldMap) {
     }
 }
 
+// POI: Object.keys return own & enumerable properties of a generic object
+for (const el of Object.keys(oldMap)) {
+    cl(`${el} ==> ${oldMap[el]}`);
+}
+
 // POI: Yey! Array is an object so it has 'hasOwnProperty' method
 cln([].hasOwnProperty("length"));
