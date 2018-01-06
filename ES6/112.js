@@ -29,5 +29,18 @@ tupling(anArray);// 1, 3, 4
 
 /**Object Destructuring */
 
-const [name, , age] = { name: "none", city: "xyz", age: 56 }
+// POI: Following will not de structure the object properties because names on the left hand is not the same as the properties in
+// the right hand side
+// POI: Object destructuring is done based on property names
+// POI: Second brace is used rather than third brace for object destructuring
+const { n, bc, ba } = { name: "none", city: "xyz", age: 56, country: "not known" };
+cln(`${n} | ${bc} | ${ba}`);// undefined | undefined | undefined
+
+const { propOne, propTwo } = { name: "none", propOne: "xyz", age: 56, propTwo: "not known" };
+cln(`${propOne} | ${propTwo}`);// xyz | not known
+
+// IMPORTANT: In Array de structuring we can simply skip mentioning a variable in a place to skip storing
+// some value
+// IMPORTANT: Object de structuring works based on property name matching. So we don't need to have a placeholder
+// if we want to skip storing some property values
 
