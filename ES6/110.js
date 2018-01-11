@@ -63,6 +63,8 @@ class Shape {
     moveFromXY() {
         console.log(`X: ${this.x} => Y: ${this.y} => Id: ${this.id}`);
     }
+
+    xPlusY() { return this.x + this.y; }
 }
 
 const aShape = new Shape(10, 20, 30);
@@ -76,14 +78,30 @@ cln(aShape);// Shape { id: 10, x: 20, y: 30 }
 aShape.moveFromXY();// X: 20 => Y: 30 => Id: 10
 
 class Circle extends Shape {
+
+    // POI: Class instance members are defined in constructor or in other method but not in the
+    // class body as typescript
+    // var member;
+
     constructor(id, x, y, radius) {
+
+        // POI: Invoke base class constructor
         super(id, x, y);
         this.radius = radius;
     }
 
     printRadius() {
+        this.fromRadius = 10;
         console.log(`Radius => ${this.radius}`);
     }
+
+    getFromRadius() {
+        return this.fromRadius;
+    }
+
+    // POI: Accessing base class member using 'super' keyword
+    // POI: Not using paenthesis around super
+    getCalculatedRadius() { return this.radius + super.xPlusY(); }
 }
 
 const aCircle = new Circle(50.23, 60.23, 70.23, 100);
@@ -126,3 +144,41 @@ Polygon.prototype.printEverything = function () { console.log(`${this.radius} =>
 const aPloygon = new Polygon(78, 89, 50, 100);
 
 aPloygon.printEverything();
+
+const crcl = new Circle(5, 6, 7, 8);
+crcl.printRadius();
+
+cln(crcl.getFromRadius());// 10
+cl(crcl.getCalculatedRadius());// 21
+
+function ComputerScreen() {
+    this.x = 10;
+    this.y = 10;
+}
+
+ComputerScreen.prototype.xPlusY = function () {
+    return this.x + this.y + 10;
+}
+
+function ColorScreen() {
+
+    // POI: Initializing base class. Same as invoking super()
+    ComputerScreen.call(this);
+
+    this.color = "RED";
+}
+
+// POI: Setting prototype
+ColorScreen.prototype = Object.create(ComputerScreen);
+
+// POI: Re-store constructor
+ColorScreen.constructor = ColorScreen;
+
+ColorScreen.prototype._toString = function () {
+
+    // POI: To invoke base class member method we need to invoke using call & passing this along
+    // POI: x & y both are defined here because of base class initialization in constructor but not the method
+    return `${this.color} | ${ComputerScreen.prototype.xPlusY.call(this)}`;
+}
+
+cl(new ColorScreen()._toString());
