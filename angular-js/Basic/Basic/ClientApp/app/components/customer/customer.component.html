@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let customer of customers">
+        <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: curPage }">
             <td>{{ customer.id }}</td>
             <td>{{ customer.firstName + " " + customer.lastName }}</td>
             <td>{{ customer.email }}</td>
@@ -23,3 +23,5 @@
         </tr>
     </tbody>
 </table>
+
+<pagination-controls (pageChange)="curPage = $event"></pagination-controls>

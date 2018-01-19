@@ -1,6 +1,6 @@
-﻿import { customer } from './../class/customer'
+﻿import { Customer } from './../class/customer'
 
-export const CUSTOMERS: customer[] = [
+export const CUSTOMERS: Customer[] = [
 
     { "id": 1, "firstName": "Bobbette", "lastName": "Wignall", "email": "bwignall0@psu.edu", "gender": "Female", "city": "Bochum", "country": "Germany" },
     { "id": 2, "firstName": "Christine", "lastName": "ducarme", "email": "cducarme1@state.tx.us", "gender": "Female", "city": "Makariv", "country": "Ukraine" },
