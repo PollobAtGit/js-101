@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
+import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { HeroesComponent } from './heroes/heroes.component';
   // POI: Why do we need declarations?
   declarations: [
     AppComponent,
-    HeroesComponent
+    HeroesComponent,
+    HeroDetailComponent
   ],
 
   // TODO: Why we need imports at all?
