@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from "./../hero";
-import { heroes } from "./../mock-heroes";
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'heroes',
@@ -12,15 +12,27 @@ export class HeroesComponent implements OnInit {
   selectedHero: Hero;
   allHeroes: Hero[];
 
-  constructor() {
-    this.allHeroes = heroes;
-  }
+  // POI: Ideally, constructor should not do anything except property initialization let alone
+  // method invocation
+  constructor(private heroService: HeroService) { }
 
   onHeroSelected(hero: Hero) {
     this.selectedHero = hero;
   }
 
   ngOnInit() {
-  }
 
+    // POI: Prmosie based operation
+    // this
+    //   .heroService
+    //   .getPromisedHeroes()
+    //   .then((hs) => this.allHeroes = hs)
+    //   .catch((e) => alert(e));
+
+    // POI: Observable based operation
+    this
+      .heroService
+      .getObservableHeroes()
+      .subscribe((hs) => this.allHeroes = hs);
+  }
 }
