@@ -45,4 +45,73 @@ for(const i in iAmEmpty) {
 	}
 }
 
+cl("\nObject Creation\n");
+
+const aBook = Object.create(iAmEmpty);
+
+// POI: iAmEmpty has prototype set to Object.prototype
+// POI: Object.prototype has add method
+// POI: iAmEmpty has iAmNotEmpty property
+// POI: aBook will have both of those properties
+for(const i in aBook) {
+	cl(i);// iAmNotEmpty | add
+}
+
+// POI: Below is the same as declaring a JS object having a property 'price' 
+// whose base class is 'iAmEmpty'
+const anotherBook = Object.create(iAmEmpty, {
+	price: {
+		configurable: true,
+		enumerable: true,
+		value: 10.23,
+		writable: true,
+	}
+});
+
+cl(anotherBook);// price: 10.23
+
+for(const i in anotherBook) {
+
+	// add | iAmNotEmpty | price
+	if(typeof i === 'function') {
+		cl(`${i} => ${anotherBook[i]()}`);
+	} else {
+		cl(`${i} => ${anotherBook[i]}`);
+	}
+	
+}
+
+// POI: Object.prototype is the prototype of aPerson
+const aPerson = {
+	name: "XYZ",
+
+	// POI: ES6 arrow function can't be used here
+	sayName: function() {
+		return this.name;
+	}
+};
+
+// POI: anotherPerson inherits from Object.prototype via aPerson
+const anotherPerson = Object.create(aPerson, {
+	age: {
+		value: 10,
+		writable: true,
+		configurable: true,
+		enumerable: true,
+	},
+
+	// POI: This name essentially overwrites inherited 'name' property
+	name: {
+		value: "ABC",
+		writable: true,
+		configurable: true,
+		enumerable: true,
+	}
+});
+
+cl(anotherPerson.sayName());// XYZ, ABC
+
+cl(anotherPerson.hasOwnProperty("name"));// true
+cl(anotherPerson.hasOwnProperty("sayName"));// false
+
 
