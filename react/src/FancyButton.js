@@ -18,3 +18,10 @@ export class FancyButton extends React.Component {
 FancyButton.defaultProps = {
     buttonStyles: { color: "black" }
 }
+
+export class ParagraphWithChildren extends React.Component {
+    render() {
+        return <p>Parameter With Children. Provided children: {this.props.children}</p>;
+    }
+}
+
