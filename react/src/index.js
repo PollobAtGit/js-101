@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Welcome } from './Welcome';
-import { FancyButton, ParagraphWithChildren } from "./FancyButton";
+import { FancyButton, ParagraphWithChildren, JSExpressionAsChildren, TodoList, JsxNotRender } from "./FancyButton";
 import { Btn, secondaryButton, InformationButton, DynTxtButton } from "./Buttons";
 
 const oFancyBtn = React
@@ -16,6 +16,8 @@ const fancyButtonProps = {
   color: "crimson",
   buttonName: "js object property expended"
 };
+
+const conditionalRenderingEnabled = false;
 
 ReactDOM.render((
   <div>
@@ -53,8 +55,47 @@ ReactDOM.render((
       <DynTxtButton isDanger />
     </ParagraphWithChildren>
 
-    <Welcome name="Pollob" />
-    <Welcome name="VSS" />
-    <Welcome name="Expensify" />
+    <ParagraphWithChildren>
+      Hello World
+    </ParagraphWithChildren>
+
+    <ParagraphWithChildren>
+      Hello
+      World
+    </ParagraphWithChildren>
+
+    {/* React trims all new line & whitespaces */}
+    <ParagraphWithChildren>
+      Hello
+
+
+
+      World
+    </ParagraphWithChildren>
+
+    <JSExpressionAsChildren>
+      {/* Passing a function (js expression) as children */}
+      {(txt) => `Passed Text value is ${txt}`}
+    </JSExpressionAsChildren>
+
+    <TodoList />
+
+    {/* Boolean (even true itself), null, undefined are not rendered to DOM */}
+    <JsxNotRender> {false} </JsxNotRender>
+    <JsxNotRender> {true} </JsxNotRender>
+    <JsxNotRender> {null} </JsxNotRender>
+    <JsxNotRender> {undefined} </JsxNotRender>
+
+    {/* 0 is rendered though it's a falsy value */}
+    <JsxNotRender> {0} </JsxNotRender>
+
+    {/* Objects are not valid as JSX child */}
+    {/* <JsxRenderFalsy> {{ s: 10 }} </JsxRenderFalsy> */}
+
+    {/* Conditional rendering */}
+
+    {conditionalRenderingEnabled && <Welcome name="Pollob" />}
+    {conditionalRenderingEnabled && <Welcome name="VSS" />}
+    {conditionalRenderingEnabled && <Welcome name="Expensify" />}
   </div>)
   , document.getElementById('root'));

@@ -25,3 +25,27 @@ export class ParagraphWithChildren extends React.Component {
     }
 }
 
+
+export function JSExpressionAsChildren(props) {
+
+    // Note the distinction that 'props' doesn't need 'this' when the component is defined as a plain old js function
+    // Passed js expression is a function. So invoking that
+    return <ParagraphWithChildren>{props.children('DAN BROWN')}</ParagraphWithChildren>;
+}
+
+export function TodoListItem(props) {
+    return <li>{props.listItem}</li>;
+}
+
+export function TodoList(props) {
+
+    const todos = ['A', 'B', 'C'];
+    return (
+        <ol>
+            {todos.map(x => <TodoListItem listItem={x} />)}
+        </ol>
+    );
+}
+
+
+export const JsxNotRender = (props) => <div>{props.children}</div>;
