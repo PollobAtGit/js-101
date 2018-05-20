@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { Welcome } from './Welcome';
 import { FancyButton, ParagraphWithChildren, JSExpressionAsChildren, TodoList, JsxNotRender } from "./FancyButton";
 import { Btn, secondaryButton, InformationButton, DynTxtButton } from "./Buttons";
+import { LogInButton } from "./PropTyps";
+import { BookList } from "./BookList";
 
 const oFancyBtn = React
   .createElement(FancyButton, {
@@ -20,7 +22,7 @@ const fancyButtonProps = {
 const conditionalRenderingEnabled = false;
 
 ReactDOM.render((
-  <div>
+  <ol>
     <FancyButton buttonName="Fancy Button" color="red" />
     <FancyButton buttonName="Fancy Default Button" />
     {oFancyBtn}
@@ -97,5 +99,9 @@ ReactDOM.render((
     {conditionalRenderingEnabled && <Welcome name="Pollob" />}
     {conditionalRenderingEnabled && <Welcome name="VSS" />}
     {conditionalRenderingEnabled && <Welcome name="Expensify" />}
-  </div>)
+
+    <LogInButton buttonText="Login Button" isDisabled={true} />
+
+    <BookList books={["A", "BV"]} />
+  </ol>)
   , document.getElementById('root'));
