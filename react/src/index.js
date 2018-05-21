@@ -5,6 +5,9 @@ import { FancyButton, ParagraphWithChildren, JSExpressionAsChildren, TodoList, J
 import { Btn, secondaryButton, InformationButton, DynTxtButton } from "./Buttons";
 import { LogInButton } from "./PropTyps";
 import { BookList } from "./BookList";
+import { ComboButton } from "./ComboButton";
+import { WelcomeGreeter, Greeter } from './servic/Greeter';
+import { GreetingComboButton } from "./GreetingComboButton";
 
 const oFancyBtn = React
   .createElement(FancyButton, {
@@ -20,6 +23,9 @@ const fancyButtonProps = {
 };
 
 const conditionalRenderingEnabled = false;
+
+const welcomeGreeter = new WelcomeGreeter();
+const greeter = new Greeter();
 
 ReactDOM.render((
   <ol>
@@ -80,6 +86,8 @@ ReactDOM.render((
       {(txt) => `Passed Text value is ${txt}`}
     </JSExpressionAsChildren>
 
+    <JSExpressionAsChildren>Expected Function But Sending Text</JSExpressionAsChildren>
+
     <TodoList />
 
     {/* Boolean (even true itself), null, undefined are not rendered to DOM */}
@@ -103,5 +111,10 @@ ReactDOM.render((
     <LogInButton buttonText="Login Button" isDisabled={true} />
 
     <BookList books={["A", "BV"]} />
+
+    <ComboButton buttonText="I Am A Big Button" comboButtonStyle={{ color: "red", height: "50px" }} />
+
+    <GreetingComboButton greeter={welcomeGreeter} />
+    <GreetingComboButton greeter={greeter} />
   </ol>)
   , document.getElementById('root'));

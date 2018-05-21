@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 export class FancyButton extends React.Component {
 
@@ -28,10 +29,19 @@ export class ParagraphWithChildren extends React.Component {
 
 export function JSExpressionAsChildren(props) {
 
+    const textToDisplay = typeof props.children === "function"
+        ? props.children('DAN BROWN')
+        : props.children;
+
     // Note the distinction that 'props' doesn't need 'this' when the component is defined as a plain old js function
     // Passed js expression is a function. So invoking that
-    return <ParagraphWithChildren>{props.children('DAN BROWN')}</ParagraphWithChildren>;
+    return <ParagraphWithChildren>{textToDisplay}</ParagraphWithChildren>;
 }
+
+// propType to function type component
+JSExpressionAsChildren.propTypes = {
+    children: PropTypes.func
+};
 
 export function TodoListItem(props) {
     return <li>{props.listItem}</li>;
