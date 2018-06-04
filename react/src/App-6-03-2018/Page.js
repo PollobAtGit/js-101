@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import { NumberList } from "./NumberList";
+import { TodoList } from "./NumberList";
+import { Todo } from "./Todo";
+import { ReadKey } from "./ReadKey";
 
 export class Page extends Component {
     render() {
+
+        // Last passed element is alright because required is Shape
+        var todos = [new Todo(1, "A"), new Todo(2, "B"), new Todo(3, "T"), { key: 23, item: "SOME" }];
+
+        var anotherTodos = [new Todo(1, "A"), new Todo(2, "B"), new Todo(3, "T"), { key: 23, item_: "SOME" }];
+
         return (
             <div>
                 {
@@ -13,7 +21,10 @@ export class Page extends Component {
                 }
                 <Warning />
                 <Warning shouldDisplay />
-                <NumberList numbers={[10, 89, 0.23]} />
+                <TodoList todos={todos} />
+                <TodoList todos={anotherTodos} />
+                <ReadKey key={520} displayText="A1" />
+                <ReadKey key={520} displayText="B1" />
             </div>
         );
     }
