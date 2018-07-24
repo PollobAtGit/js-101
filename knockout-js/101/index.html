@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>knockout js [101]</title>
+	<script type="text/javascript" src="./knockout-3.4.2.js"></script>
+</head>
+
+<body>
+	<p>First Name</p>
+
+	<input type="text" name="first-name" data-bind="value: first_name">
+
+	<p>Last Name</p>
+
+	<input type="text" data-bind="value: last_name">
+
+	<p>
+		<span data-bind="text: full_name"></span>
+	</p>
+
+	<button id="btn">See View Model data</button>
+	<button data-bind="click: capitalized_full_name">Display uppercased last name</button>
+
+	<script type="text/javascript">
+
+		function AppViewModel() {
+
+			this.first_name = ko.observable("Bert - bert");
+			this.last_name = ko.observable("Bertington");
+
+			// POI: observable(s) values are being invoked as 
+			// getter/method
+
+			// POI: this is being passed
+			this.full_name = ko.computed(function () {
+				return `${this.first_name()} ${this.last_name()}`;
+			}, this);
+
+			this.capitalized_full_name = function () {
+				this.last_name(this.last_name().toUpperCase());
+			};
+		}
+
+		var vm = new AppViewModel();
+
+		ko.applyBindings(vm);
+
+		const btnEl = document.getElementById("btn");
+
+		btnEl.addEventListener("click", function () {
+			// console.log(JSON.stringify(vm));
+		});
+	</script>
+</body>
+
+</html>
