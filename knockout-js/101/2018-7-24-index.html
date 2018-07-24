@@ -1,0 +1,85 @@
+<html>
+
+<head>
+	<title>
+		Making Data Editable
+	</title>
+</head>
+<script src="./knockout-3.4.2.js" type="text/javascript"></script>
+
+<body>
+	<h2>Your seat reservations</h2>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Passenger name</th>
+				<th>Meal</th>
+				<th>Surcharge</th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<!-- 
+				POI: Getting individual value from observable array directly, no need to 
+				invoke as method/getter 
+			-->
+
+		<tbody data-bind="foreach: seats">
+			<tr>
+				<td>
+					<input type="text" data-bind="value: name" />
+				</td>
+				<td>
+					<input type="text" data-bind="value: meal().mealName" />
+				</td>
+				<td>
+					<input type="text" data-bind="value: meal().price" />
+				</td>
+			</tr>
+		</tbody>
+
+		<!-- POI: addSeat needs to be inside the model that was bound to UI -->
+		<button data-bind="click: addSeat">Reserve another seat</button>
+
+		<div data-bind="foreach: seats">
+			<p data-bind="text: name"></p>
+		</div>
+	</table>
+</body>
+
+<script type="text/javascript">
+	// Class to represent a row in the seat reservations grid
+	function SeatReservation(name, initialMeal) {
+		var self = this;
+		self.name = ko.observable(name);
+		self.meal = ko.observable(initialMeal);
+	}
+
+	// Overall viewmodel for this screen, along with initial state
+	function ReservationsViewModel() {
+		var self = this;
+
+		// Non-editable catalog data - would come from the server
+		self.availableMeals = [
+			{ mealName: "Standard (sandwich)", price: 0 },
+			{ mealName: "Premium (lobster)", price: 34.95 },
+			{ mealName: "Ultimate (whole zebra)", price: 290 }
+		];
+
+		// Editable data
+		self.seats = ko.observableArray([
+			new SeatReservation("Steve", self.availableMeals[1]),
+			new SeatReservation("Bert", self.availableMeals[2])
+		]);
+
+		self.addSeat = function () {
+			self.seats.push(new SeatReservation("ko", self.availableMeals[0]));
+		}
+	}
+
+	const vm = new ReservationsViewModel();
+	ko.applyBindings(vm);
+</script>
+
+</html>
