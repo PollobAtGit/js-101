@@ -1,0 +1,148 @@
+<html>
+
+<head>
+    <title>
+        Making Data Editable
+    </title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<script src="./knockout-3.4.2.js" type="text/javascript"></script>
+
+<body>
+    <h2>Your seat reservations</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Passenger name</th>
+                <th>Meal</th>
+                <th>Surcharge</th>
+                <th>Operation(s)</th>
+            </tr>
+        </thead>
+
+        <!-- 
+				POI: Getting individual value from observable array directly, no need to 
+				invoke as method/getter 
+			-->
+
+        <tbody data-bind="foreach: seats">
+            <tr>
+                <td>
+                    <input type="text" data-bind="value: name" />
+                </td>
+                <td>
+                    <!-- value in select:options gets the value from model & also sets value in model when option set is changed -->
+                    <select data-bind="options: $root.availableMeals, value: meal, optionsText: 'mealName'"></select>
+                </td>
+                <td>
+                    <input type="text" data-bind="value: meal().price" />
+                </td>
+                <td>
+                    <button data-bind="click: $root.removeThisSeat">Remove this reservation</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div data-bind="if: seats().length > 0 && total_charge() != 0">
+        <div class="alert alert-danger" role="alert">
+            <p>Total cost
+                <span data-bind="text: total_charge"></span>
+            </p>
+        </div>
+    </div>
+
+
+    <!-- POI: addSeat needs to be inside the model that was bound to UI -->
+    <button data-bind="click: addSeat, enable: seats().length < 5">Reserve another seat</button>
+    <button data-bind="click: removeSeat, enable: seats().length > 0">Remove latest (added) seat</button>
+
+    <div data-bind="if: seats().length > 0">
+        <div class="card">
+            <h5 class="card-header">Current reservations</h5>
+            <div class="card-body" role="alert" data-bind="foreach: seats">
+                <p>
+                    <span data-bind="text: name"></span>
+                    <span data-bind="text: meal().mealName"></span>
+                    <span data-bind="text: formatted_price"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div data-bind="if: reservationsToUndo().length > 0">
+        <div class="card">
+            <h5 class="card-header">Undo removal</h5>
+            <div class="card-body" data-bind="foreach: reservationsToUndo">
+                <div>
+                    <span data-bind="text: name"></span>
+                    <span data-bind="text: meal().mealName"></span>
+                    <span data-bind="text: meal().price"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    // Class to represent a row in the seat reservations grid
+    function SeatReservation(name, initialMeal) {
+        var self = this;
+        self.name = ko.observable(name);
+        self.meal = ko.observable(initialMeal);
+
+        self.formatted_price = ko.computed(function () {
+            const price = Number(self.meal().price());
+            return price ? `$${price.toFixed(2)}` : "None";
+        }, this);
+    }
+
+    function Meal(meal_name, meal_price) {
+        const self = this;
+        self.mealName = meal_name;
+        self.price = ko.observable(meal_price);
+    }
+
+    // Overall viewmodel for this screen, along with initial state
+    function ReservationsViewModel() {
+        var self = this;
+
+        // Non-editable catalog data - would come from the server
+        self.availableMeals = [
+            new Meal("Standard (sandwich)", 34.95),
+            new Meal("Premium (lobster)", 10.99),
+            new Meal("Ultimate (whole zebra)", -99.9)
+        ];
+
+        // Editable data
+        self.seats = ko.observableArray([
+            new SeatReservation("Steve", self.availableMeals[1]),
+            new SeatReservation("Bert", self.availableMeals[2])
+        ]);
+
+        self.reservationsToUndo = ko.observableArray([]);
+
+        self.addSeat = function () {
+            self.seats.push(new SeatReservation("ko", self.availableMeals[0]));
+        }
+
+        self.removeSeat = function () {
+            self.reservationsToUndo.push(self.seats.pop());
+        }
+
+        self.removeThisSeat = function (seat) {
+            self.seats.splice(self.seats.indexOf(seat), 1);
+            self.reservationsToUndo.push(seat);
+        }
+
+        self.total_charge = ko.computed(function () {
+            return self.seats().map(x => Number(x.meal().price())).reduce((s, x) => s + x, 0);
+        }, this);
+    }
+
+    const vm = new ReservationsViewModel();
+    ko.applyBindings(vm);
+</script>
+
+</html>
