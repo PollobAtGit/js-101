@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title></title>
+    <style>
+        #results li.pass {
+            color: green
+        }
+
+        #results li.fail {
+            color: red;
+        }
+    </style>
+    <script src="./log.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <h1>
+        Secret of JS Ninja
+    </h1>
+
+    <ul id="results"></ul>
+</body>
+<script type="text/javascript">
+    (function () {
+
+        let results;
+
+        this.assert = function assert(value, description) {
+
+            const li = document.createElement("li");
+            li.className = value ? "pass" : "fail";
+            li.appendChild(document.createTextNode(description));
+            results.appendChild(li);
+
+            if (!value) {
+                li.parentNode.parentNode.className = "fail";
+            }
+
+            return li;
+        }
+
+        this.test = function test(name, fn) {
+            results = document.getElementById("results");
+            results = assert(true, name).appendChild(document.createElement("ul"));
+            fn();
+        }
+    })();
+
+    window.onload = function () {
+        test("A Test", function () {
+            assert(true, "First assertion completed");
+            assert(false, "Second assertion completed");
+            assert(false, "Third assertion completed");
+        });
+
+        test("B Test", function () {
+            assert(true, "First assertion done");
+            assert(false, "Second assertion failed");
+            assert(true, "Third assertion done");
+        })
+    }
+
+</script>
+
+</html>
