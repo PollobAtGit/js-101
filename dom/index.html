@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM</title>
+</head>
+<script type="text/javascript">
+    
+    const formEl = document.getElementsByTagName("form")
+
+    formEl.submit = function (event) {
+        console.log.call(console, event.target)
+        console.log.call(console, event.currentTarget)
+    }
+
+</script>
+<body>
+
+    <form>
+        <input type="text" name="name">
+        <input type="button" name="submit" value="Click me">
+        
+        <!--
+            <option>
+                <select>A</select>
+                <select>B</select>
+            </option>
+        -->
+    </form>
+
+</body>
+</html>
