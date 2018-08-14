@@ -1,13 +1,30 @@
-<form>
+<form #authenticationForm="ngForm">
   <div class="form-group">
     <label for="user_name">Email address</label>
-    <input [(ngModel)]="userName" type="text" name="user_name" id="user_name" class="form-control" aria-describedby="emailHelp"
-      placeholder="Put user name" />
+    <input #userNameInputBox="ngModel" [(ngModel)]="userName" type="text" name="user_name" id="user_name" class="form-control"
+      aria-describedby="emailHelp" placeholder="Put user name" required />
+  </div>
+  <div [hidden]="userNameInputBox.valid || userNameInputBox.untouched" class="alert alert-danger ">
+    User name is required
   </div>
   <div class="form-group">
-    <label for="password">Email address</label>
-    <input [(ngModel)]="password" type="text" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Put user name"
-    />
+    <label for="password">Password</label>
+    <input [(ngModel)]="password" type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp"
+      placeholder="Put user name" required #pwd="ngModel" />
+  </div>
+  <div [hidden]="pwd.valid || pwd.untouched" class="alert alert-danger">
+    Password is required to login
   </div>
   <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
 </form>
+<br>
+<br>
+<div>
+  # TODO: Remove me {{diagnostic}}
+</div>
+<div>
+  # TODO: user name input box state: {{userNameInputBox.className}}
+</div>
+<div>
+  # TODO: form state: {{authenticationForm.className}}
+</div>
