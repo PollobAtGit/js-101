@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>deferring script</title>
+</head>
+<body>
+
+    <h1>Deferring scripts</h1>
+
+    <ol>
+        <li>JS file will be downloaded whenever script tag is encountered</li>
+        <li>JS file's execution is deferred not the scripts download operation</li>
+        <li>keyword defer indicates to the browser that the this script is not required for page load (?)</li>
+        <li>deferred marked script will be executed before window.onload event (why? then where's the point except allowing downloading of other resources?)</li>
+    </ol>
+
+    <script type="text/javascript" defer>
+        alert('from deferred script tag')
+    </script>
+
+    <script type="text/javascript">
+        alert("from usual script tag")
+    </script>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            alert('from onload');
+        };
+    </script>
+</body>
+</html>
