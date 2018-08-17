@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic script element</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    function loadJSResource(jsResourceUrl, fn) {
+
+        const scriptTag = document.createElement('script');
+        scriptTag.type = 'text/javascript';
+        scriptTag.src = jsResourceUrl;
+
+        // IE
+        if(scriptTag.readyState) {
+            scriptTag.onreadystatechange = function() {
+                if(scriptTag.readyState === 'ready' || scriptTag.readyState === 'complete') {
+                    scriptTag.onreadystatechange = null;
+                    fn();
+                }
+            }
+        } else {
+            // script tag's onload function
+            scriptTag.onload = function() {
+                fn();
+            }
+        }
+
+        // Script will be downloaded here & will be executed too
+        document.getElementsByTagName('body')[0].appendChild(scriptTag);
+    }
+
+    function print(messageToPrint, fn) {
+        return function() {
+            console.log(messageToPrint);
+
+            if(fn) {
+                fn();
+            }
+        }
+    }
+
+    // synchronously load all scripts
+
+    i = 10
+    loadJSResource('dummy-file.js', print('YUI tool has been loaded properly', function() {
+        i = 20
+        loadJSResource('dummy-file-1.js', print('YUI tool has been loaded properly', function() {
+            i = 30
+            loadJSResource('dummy-file-2.js', print('YUI tool has been loaded properly', function() {
+                i = 40
+                loadJSResource('dummy-file-3.js', print('YUI tool has been loaded properly'));
+            }));
+        }));
+    }));
+
+</script>
+
+</body>
+</html>
