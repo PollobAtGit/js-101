@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Identifier Resolution Performance</title>
+</head>
+<body>
+
+<h1 id="global-document-access"></h1>
+<h1 id="cache-global-object"></h1>
+
+<script type="text/javascript">
+    window.onload = function() {
+
+        // 1857
+        function accessingDocument() {
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+            if(document){ }
+        }
+
+        function accessingDocumentViaVariable() {
+
+            // cache global object for further referencing
+            const doc = document;
+
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+            if(doc){ }
+        }
+
+        const startTime = new Date();
+        for(var i = 0; i < 5000000000; i++) {
+            accessingDocument();
+            accessingDocument();
+            accessingDocument();
+        }
+
+        document.getElementById('global-document-access').innerText = 'Previous Time (global) : ' + (new Date() - startTime);
+
+        const startTimeViaVariable = new Date();
+        for(var i = 0; i < 5000000000; i++) {
+            accessingDocumentViaVariable();
+            accessingDocumentViaVariable();
+            accessingDocumentViaVariable();
+        }
+
+        document.getElementById('cache-global-object').innerText = 'Previous Time (cached): ' + (new Date() - startTimeViaVariable);
+
+        /*
+        Chrome:
+            Previous Time (global) : 11239
+            Previous Time (cached): 10428
+
+            Previous Time (global) : 11801
+            Previous Time (cached): 11655
+
+            Previous Time (global) : 11873
+            Previous Time (cached): 12280
+        */
+    }
+</script>
+</body>
+</html>
