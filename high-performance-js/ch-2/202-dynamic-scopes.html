@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Scopes</title>
+</head>
+<body>
+
+    <p>Dynamic scopes doesn't help browser engine to optimize variable lookup</p>
+    <ul>
+        <li>Using function eval(), try ... catch and statement with creates a dynamic scope</li>
+        <li>In presence of dynamic scope browser has no way to optimize for variable lookup</li>
+        <li>So browser resorts to slower hash based approach to identify variables</li>
+    </ul>
+
+    <p>Only use dynamic scoping when necessary otherwise performanc might take a toll</p>
+
+    <p>
+        For example, in the following code snippet window's value depends on the value of 'code' which means it might not refer to the
+        global 'window' object
+    </p>
+    <pre>
+
+    function execute(code) {
+        eval(code);
+
+        function subroutine() {
+            return window;
+        }
+
+        var windowInstance = subroutine();
+
+        if(!windowInstance.alert) {
+            console.log(JSON.stringify(windowInstance));// {"key":-99}
+        }
+    }
+
+    execute("var window = { 'key': -99 }");
+    execute("console.log('doing nothing')");
+
+    </pre>
+
+    <script type="text/javascript">
+        function execute(code) {
+            eval(code);
+
+            function subroutine() {
+                return window;
+            }
+
+            var windowInstance = subroutine();
+
+            if(!windowInstance.alert) {
+                console.log(JSON.stringify(windowInstance));// {"key":-99}
+            }
+        }
+
+        execute("var window = { 'key': -99 }");
+        execute("console.log('doing nothing')");
+    </script>
+</body>
+</html>

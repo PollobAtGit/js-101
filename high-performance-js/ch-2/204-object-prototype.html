@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object's prototype</title>
+</head>
+<body>
+
+<ul>
+    <li>
+        If there were any code just inside ...script... tag but not inside window.onload then when would that be executed? Before window.onload or after or during?
+    </li>
+    <li>
+        Google chrome and some other browsers expose __proto__ property of a js object. This __proto__ can even be assigned (so little bit risky)
+    </li>
+    <li>
+        __proto__ of a normal js object will refer to Object instance which defines methods like ...hasOwnProperty..., ...toString..., ...isPrototypeOf... etc.
+    </li>
+
+</ul>
+
+<script type="text/javascript">
+
+    // if there were any code in this place that would have been executed when? before window.onload or after or during?
+
+    window.onload = function() {
+        const book = { 'publisher': 'apress' };
+        console.log(book.__proto__);
+        console.log(book.hasOwnProperty('publisher'));// true
+        console.log(book.hasOwnProperty('toString'));// false
+
+        if(!book.__proto__.__proto__) {
+            console.log('__proto__ of __proto__ of book is undefined');
+        }
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Closures should be used with caution</title>
+</head>
+<body>
+
+    <p>Closures are amazing feature that allows js functions to access objects from outside it's local scope</p>
+    <ul>
+        <li>That's the very reason it might cause performance issue and might lead to memory leak (specially in IE)</li>
+        <li>
+            Generally a function's activation objct is destroyed when that function's execution context is destroyed but that's not the case with closures. In case of closures that function's activation object lives even after the function's execution context is destroyed
+        </li>
+    </ul>
+
+    <button id="save-id">Save (to local storage) Id</button>
+
+    <script type="text/javascript">
+
+        const storageIdKey = "id-key";
+
+        function saveDocument(id) {
+            localStorage.setItem(storageIdKey, id)
+        }
+
+        function assignEvents() {
+            const id = Math.random() * 100;
+
+            // this event handler is a closure. It is referencing function ...assignEvents..., ...id..., ...saveDocument.... and
+            // obviously global scope (...window...)
+            document.getElementById('save-id').onclick = function() {
+                saveDocument(id);
+            }
+        }
+
+        assignEvents();
+    </script>
+</body>
+</html>
