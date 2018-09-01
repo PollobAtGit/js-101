@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>custom object nexted members</title>
+</head>
+<body>
+
+<p>seems like nesting to a excessive level can cause performance issue is js</p>
+<p>following code doesn't compile because const has been defined not within braces</p>
+<p>so not only DOM's nested property access is expensive also any JS object's nested property access is a costly operation </p>
+
+<pre>
+(function (cond) {
+    if(cond)
+        const k = 10;
+}, true)
+
+// correct version
+(function(cond) {
+    if(cond) {
+        const k = 10
+    }
+})
+</pre>
+
+<script type="text/javascript">
+
+    const a = {
+        b: {
+            c: {
+                d: {
+                    e: {
+                        f: {
+                            g: {
+                                h: {
+                                    i:{
+                                        j: {
+                                            k: {
+                                                l: {
+                                                    m: {
+                                                        n: "i am ridiculously nested"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    function nested_attriute_accessor_2(fn) {
+        return function() {
+
+            // 'cache' will not be in the scope/context of fn because fn holds reference to all variables of it's scope where it was defined
+            const cache = a.b.c.d.e.f.g.h.i.j.k.l.m.n;
+
+            for (let i = 0; i < 10000; i++) {
+
+                // fn is passed as a function (as closure) which means the function will contain everythin in it's scope/execution context
+                // and if that has any reference to some variable that is intended to be declared here (where it will run eventually)
+                // then the function execution will fail
+
+                const v = fn();
+            }
+        }
+    }
+
+    function nested_attriute_accessor(is_use_cache) {
+        return function() {
+
+            const fn = is_use_cache ? function() { return cache; } : function() { return a.b.c.d.e.f.g.h.i.j.k.l.m.n; }
+            const cache = a.b.c.d.e.f.g.h.i.j.k.l.m.n;
+
+            for (let i = 0; i < 10000; i++) {
+                const v = fn();
+            }
+        }
+    }
+
+    function timer_decorator(fn) {
+
+        const start_time = new Date();
+
+        for (let i = 0; i < 10000; i++) {
+            fn();
+        }
+
+        return new Date() - start_time;
+    }
+
+    console.log("using cached value: " + timer_decorator(nested_attriute_accessor(true)))
+    console.log("accessing nested value directly: " + timer_decorator(nested_attriute_accessor(false)))
+
+    const is_use_cache = true;
+
+    // cache will be defined/undefined when the function will be executed. Before that cache is neither defined not undefined
+    // fn has a variable (conceptually) that holds it's scope/context when the function will be executed later then the
+    // vairables referenced inside the function will be accessed from this variable. Obviously, if not found then an reference exception will
+    // be thrown
+
+    const fn = is_use_cache ? function() { return cache; } : function() { return a.b.c.d.e.f.g.h.i.j.k.l.m.n; }
+
+    // console.log("using cached value: " + timer_decorator(nested_attriute_accessor_2(fn)))
+    // console.log("accessing nested value directly: " + timer_decorator(nested_attriute_accessor_2(fn)))
+
+    function return_closure() {
+        return function() {
+            eval('console.log(r)');
+        }
+    }
+
+    function call_back_executor(fn) { fn(); }
+
+    const closure = return_closure();
+
+    let r = 30;
+
+    call_back_executor(closure);
+
+    r = 40;
+
+    call_back_executor(closure);
+
+</script>
+
+</body>
+</html>

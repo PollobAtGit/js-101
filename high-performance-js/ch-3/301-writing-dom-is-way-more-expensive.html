@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>dom writing is expensive</title>
+</head>
+<body>
+
+<p>writing to a dom element frequently ha serious performance implication. When it's required to write to a same dom element make sure
+to do the reprinting in constant time</p>
+
+<div></div>
+
+<script type="text/javascript">
+
+    window.onload = function() {
+
+        const iteration_count = 1000;
+
+        function append_to_div() {
+
+            iterate_n_times(iteration_count, function(curr_iteration) {
+                const divs = document.getElementsByTagName('div');
+                if(divs.length) {
+                    const cu_div = divs[0];
+                    cu_div.innerHTML = cu_div.innerHTML + curr_iteration.toString() + "<br />"
+                }
+            });
+        }
+
+        function iterate_n_times(n, fn) {
+            for (let i = 0; i < n; i++) {
+                fn(i);
+            }
+        }
+
+        function append_to_div_with_string_concat() {
+            let whole_str = "targetting constant time <br />";
+            iterate_n_times(iteration_count, function(curr_iteration) {
+                whole_str = whole_str + curr_iteration.toString() + "<br />"
+            })
+
+            const divs = document.getElementsByTagName("div");
+            if(divs.length) {
+                const cu_div = divs[0];
+                cu_div.innerHTML = whole_str;
+            }
+        }
+
+        function timer_decorator(fn) {
+            const start_time = new Date();
+
+            fn();
+
+            return new Date() - start_time;
+        }
+
+        console.log("appending with constant dom access: " + timer_decorator(append_to_div_with_string_concat));
+        console.log("appending with constant dom access: " + timer_decorator(append_to_div));
+    }
+
+</script>
+
+</body>
+</html>

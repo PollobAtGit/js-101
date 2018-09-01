@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>nested members performance</title>
+</head>
+<body>
+
+<h1>objects can have nested members</h1>
+<p>Nested members of an object can have degrading performance</p>
+<ul>
+    <li>window.location.href is much slower than location.href. Why (?) location is attached with window</li>
+    <li>Upon investigation for chrome V8 engine the observation above is not true at least now in V8 [windows.location.href] has same access time as [location.href]</li>
+</ul>
+
+<script type="text/javascript">
+
+    window.onload = function() {
+        function execute_window_fn(fn) {
+            return function() {
+                const loop_iteration = 1000;
+                for(let i = 0; i < loop_iteration; i ++) {
+                    for(let j = 0; j < loop_iteration; j++) {
+                        const k = fn();
+                    }
+                }
+            }
+        }
+
+        function timer_decoratror(fn) {
+
+            const startTime = new Date();
+
+            fn();
+
+            return new Date() - startTime
+        }
+
+        const window_locations_time = [];
+        const locations_time = [];
+        const test_case_iteration = 5;
+
+        for (let i = 0; i < test_case_iteration; i ++) {
+            window_locations_time.push(timer_decoratror(execute_window_fn(function() { return window.location.href; })));
+            locations_time.push(timer_decoratror(execute_window_fn(function() { return location.href; })));
+        }
+
+        console
+            .log('time taken to access [window.location.href]: ' + (window_locations_time.reduce((s, el) => s + el, 0) / test_case_iteration));
+
+        console
+            .log('time taken to access [location.href]: ' + (locations_time.reduce((s, el) => s + el, 0) / test_case_iteration));
+
+    }
+
+</script>
+
+</body>
+</html>
